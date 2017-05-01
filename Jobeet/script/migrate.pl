@@ -15,8 +15,10 @@ GetOptions(
 
 my $dsn = models('conf')->{database}->[0];
 my $gd = GitDDL->new(
-    work_tree => './',
-    ddl_file  => './sql/schema.sql',
+    #work_tree => './',
+    work_tree => '../',
+    #ddl_file => './sql/schema.sql',
+    ddl_file  => './Jobeet/sql/schema.sql',
     dsn       => models('conf')->{database},
 );
 
