@@ -1,6 +1,9 @@
 .DS_Store
 local/
+Makefile
+cpanfile
 cpanfile.snapshot
 config_local.pl
 t/
 xt/
+
