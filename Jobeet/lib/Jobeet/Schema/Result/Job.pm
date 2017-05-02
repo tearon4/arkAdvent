@@ -3,6 +3,7 @@ use v5.16.3;
 use strict;
 use warnings;
 use parent 'Jobeet::Schema::ResultBase';
+use  Jobeet::Models;
 
 #テーブル名の定義
 __PACKAGE__->table('jobeet_job');
@@ -106,5 +107,11 @@ __PACKAGE__->add_unique_constraint(['token']);
 
 __PACKAGE__->belongs_to( category => 'Jobeet::Schema::Result::Category', 'category_id' );
 
+sub insert {
+    my $self = shift;
+
+    $self->expires_at( models('Schema')->now->add( days => 30 ) );
+    $self->next::method(@_);
+}
 
 1;
