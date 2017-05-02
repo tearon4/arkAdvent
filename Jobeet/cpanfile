@@ -10,3 +10,4 @@ requires 'DBIx::Class';
 requires 'SQL::Translator';
 requires 'GitDDL';
 requires 'Path::Class';
+requires 'DateTime::Format::SQLite';
