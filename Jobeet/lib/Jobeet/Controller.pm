@@ -1,6 +1,5 @@
 package Jobeet::Controller;
 use Ark 'Controller';
-
 use Jobeet::Models;
 
 # default 404 handler
@@ -22,4 +21,5 @@ sub end :Private {
         $c->forward( $c->view('MT') );
     }
 }
-__PACKAGE__->meta->make_immutable;
+
+1;
