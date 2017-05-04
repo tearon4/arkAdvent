@@ -3,6 +3,10 @@ use warnings;
 use FindBin::libs;
 
 use Jobeet::Models;
+use DateTime;
+
+my $job_rs = models('Schema::Job');
+my $cat_rs = models('Schema::Category');
 
 # create default Categories
 for my $category_name (qw/Design Programming Manager Administrator/) {
@@ -10,8 +14,7 @@ for my $category_name (qw/Design Programming Manager Administrator/) {
 }
 
 # create default Jobs
-my $programming_category =
-    models('Schema::Category')->find({ name => 'Programming' });
+my $programming_category = $cat_rs->find({ name => 'Programming' });
 $programming_category->add_to_jobs({
     type         => 'full-time',
     company      => 'Sensio Labs',
@@ -25,10 +28,10 @@ $programming_category->add_to_jobs({
     is_activated => 1,
     token        => 'job_sensio_labs',
     email        => 'job@example.com',
-    expires_at   => '2010-10-10',
+    expires_at   => '2016-10-10',
 });
 
-my $design_category = models('Schema::Category')->find({ name => 'Design' });
+my $design_category = $cat_rs->find({ name => 'Design' });
 $design_category->add_to_jobs({
     type         => 'part-time',
     company      => 'Extreme Sensio',
@@ -42,5 +45,25 @@ $design_category->add_to_jobs({
     is_activated => 1,
     token        => 'job_extreme_sensio',
     email        => 'job@example.com',
-    expires_at   => '2010-10-10',
+    expires_at   => '2016-10-10',
 });
+
+my $cat_programming = $cat_rs->find({ name => 'Programming' });
+
+
+for my $i (100 .. 130) {
+    my $job = $job_rs->create({
+        category_id  => $cat_programming->id,
+        company      => "Company $i",
+        position     => 'Web Developer',
+        location     => 'Paris, France',
+        description  => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        how_to_apply => "Send your resume to lorem.ipsum [at] company_${i}.sit",
+        is_public    => 1,
+        is_activated => 1,
+        token        => "job_$i",
+        email        => 'job@example.com',
+    });
+}
+
+
