@@ -49,20 +49,21 @@ $design_category->add_to_jobs({
 });
 
 my $cat_programming = $cat_rs->find({ name => 'Programming' });
-my $job = $job_rs->create({
-    category_id  => $cat_programming->id,
-    company      => 'Sensio Labs',
-    position     => 'Web Developer',
-    location     => 'Paris, France',
-    description  => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
-    how_to_apply => 'Send your resume to lorem.ipsum [at] dolor.sit',
-    is_public    => 1,
-    is_activated => 1,
-    token        => 'job_expired',
-    email        => 'job@example.com',
-});
 
-$job->update({
-    created_at => '2016-12-01',
-    expires_at => '2016-12-31',
-});
+
+for my $i (100 .. 130) {
+    my $job = $job_rs->create({
+        category_id  => $cat_programming->id,
+        company      => "Company $i",
+        position     => 'Web Developer',
+        location     => 'Paris, France',
+        description  => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        how_to_apply => "Send your resume to lorem.ipsum [at] company_${i}.sit",
+        is_public    => 1,
+        is_activated => 1,
+        token        => "job_$i",
+        email        => 'job@example.com',
+    });
+}
+
+
