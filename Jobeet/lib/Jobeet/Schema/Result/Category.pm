@@ -21,6 +21,11 @@ __PACKAGE__->add_columns(
         size        => 255,
         is_nullable => 0,
     },
+    slug => {
+        data_type   => 'VARCHAR',
+        size        => 255,
+        is_nullable => 1,
+    },
 );
 
 sub get_active_jobs {
@@ -39,6 +44,7 @@ sub get_active_jobs {
 
 __PACKAGE__->set_primary_key('id');
 __PACKAGE__->add_unique_constraint(['name']);
+__PACKAGE__->add_unique_constraint(['slug']);
 
 __PACKAGE__->has_many( jobs => 'Jobeet::Schema::Result::Job', 'category_id' );
 
