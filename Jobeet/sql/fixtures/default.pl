@@ -1,10 +1,13 @@
 # create default Categories
 for my $category_name (qw/Design Programming Manager Administrator/) {
-    models('Schema::Category')->create({ name => $category_name });
+    models('Schema::Category')->create({
+        name => $category_name
+    });
 }
 
 # create default Jobs
-my $programming_category = $cat_rs->find({ name => 'Programming' });
+my $programming_category =
+    models('Schema::Category')->find({ name => 'Programming' });
 $programming_category->add_to_jobs({
     type         => 'full-time',
     company      => 'Sensio Labs',
@@ -18,10 +21,10 @@ $programming_category->add_to_jobs({
     is_activated => 1,
     token        => 'job_sensio_labs',
     email        => 'job@example.com',
-    expires_at   => '2016-10-10',
+    expires_at   => '2010-10-10',
 });
 
-my $design_category = $cat_rs->find({ name => 'Design' });
+my $design_category = models('Schema::Category')->find({ name => 'Design' });
 $design_category->add_to_jobs({
     type         => 'part-time',
     company      => 'Extreme Sensio',
@@ -35,9 +38,8 @@ $design_category->add_to_jobs({
     is_activated => 1,
     token        => 'job_extreme_sensio',
     email        => 'job@example.com',
-    expires_at   => '2016-10-10',
+    expires_at   => '2010-10-10',
 });
-
 
 {
     my $cat_programming = models('Schema::Category')->find({ name => 'Programming' });
