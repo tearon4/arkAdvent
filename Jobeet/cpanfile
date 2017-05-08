@@ -1,13 +1,14 @@
 requires 'Ark';
+requires 'Data::Page::Navigation';
+requires 'Data::UUID';
 requires 'DateTime';
+requires 'DateTime::Format::SQLite';
 requires 'DBIx::Class';
+requires 'Digest::SHA1';
 requires 'FindBin::libs';
 requires 'SQL::Translator';
 requires 'String::CamelCase';
 requires 'Text::MicroTemplate::Extended';
 requires 'Text::MicroTemplate::DataSection';
-requires 'DBIx::Class';
-requires 'SQL::Translator';
 requires 'GitDDL';
 requires 'Path::Class';
-requires 'DateTime::Format::SQLite';
