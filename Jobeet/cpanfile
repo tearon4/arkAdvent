@@ -14,3 +14,4 @@ requires 'GitDDL';
 requires 'Path::Class';
 requires 'Test::More';
 requires 'Test::Harness';
+requires 'CGI::Simple';
