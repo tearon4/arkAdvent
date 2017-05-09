@@ -21,8 +21,16 @@ sub create_from_form {
     });
 
     $txn_guard->commit;
-
     $job;
+}
+
+sub latest_post {
+    my ($self) = @_;
+
+    my $r = $self->search( { is_activated => 1, },
+        { order_by => { -desc => 'created_at' } } );
+
+    $r->first;
 }
 
 1;
