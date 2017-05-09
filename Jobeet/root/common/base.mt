@@ -10,7 +10,7 @@
     <div id="container">
       <div id="header">
         <div class="content">
-          <h1><a href="<?= $c->uri_for('/') ?>">
+          <h1><a href="<?= $c->uri_for('/job') ?>">
             <img src="/images/logo.jpg" alt="Jobeet Job Board" />
           </a></h1>
 
@@ -36,6 +36,22 @@
           </div>
         </div>
       </div>
+
+? my @history = @{ $c->session->get('job_history') || [] };
+? if (@history) {
+      <div id="job_history">
+        Recent viewed jobs:
+        <ul>
+? my $i = 0;
+? for my $job (@history) {
+          <li>
+            <?= $job->{position} ?> - <?= $job->{company} ?>
+          </li>
+? last if ++$i == 3;
+? } # endfor $job
+        </ul>
+      </div>
+? } # endif @history
 
       <div id="content">
         <div class="content">

@@ -5,6 +5,25 @@ use Data::Page::Navigation;
 use_model 'Jobeet::Models';
 our $VERSION = '0.01';
 
+use_plugins qw {
+    Session
+    Session::State::Cookie
+    Session::Store::Model
+};
+
+config 'Plugin::Session' => {
+    # セッション期限を30日に設定
+    expires => '+30d',
+};
+
+config 'Plugin::Session::State::Cookie' => {
+    cookie_name => 'jobeet_session',
+};
+
+config 'Plugin::Session::Store::Model' => {
+    model => 'cache',
+};
+
 __PACKAGE__->meta->make_immutable;
 
 __END__
