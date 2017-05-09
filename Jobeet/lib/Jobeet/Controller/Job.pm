@@ -42,6 +42,7 @@ sub job :Chained('/') :PathPart :CaptureArgs(1) {
     $c->stash->{job} = models('Schema::Job')->find({ token => $job_token })
         or $c->detach('/default');
 }
+
 # /job/{job_token}/edit （編集）
 sub edit :Chained('job') :PathPart :Form('Jobeet::Form::Job') {
     my ($self, $c) = @_;
@@ -61,6 +62,7 @@ sub edit :Chained('job') :PathPart :Form('Jobeet::Form::Job') {
         });
     }
 }
+
 # /job/{job_token}/delete （削除）
 sub delete :Chained('job') :PathPart {
     my ($self, $c) = @_;
@@ -68,6 +70,7 @@ sub delete :Chained('job') :PathPart {
     $c->stash->{job}->delete;
     $c->redirect( $c->uri_for('/job') );
 }
+
 # /job/{job_token}/publish （公開）
 sub publish :Chained('job') :PathPart {
     my ($self, $c) = @_;
